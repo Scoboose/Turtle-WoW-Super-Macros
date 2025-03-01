@@ -8,7 +8,7 @@
 -- Adjust the configs below to your liking
 -- Open super macro
 -- Make a new macro
--- On the left add /script letsGo()
+-- On the left add /script WLStart()
 -- On the right paste this whole document in
 -- Click save macro
 -- Click Save Extended
