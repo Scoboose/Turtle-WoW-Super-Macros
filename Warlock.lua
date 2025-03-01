@@ -1,5 +1,4 @@
--- Must have 3 addons installed
--- Quick Heal - https://github.com/Bestoriop/QuickHeal
+-- Must have 2 addons installed
 -- CerniesWonderfulFunctions - https://github.com/Cernie/CerniesWonderfulFunctions
 -- SuperMacro - https://github.com/Monteo/SuperMacro
 
