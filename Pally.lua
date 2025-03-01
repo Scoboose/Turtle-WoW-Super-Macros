@@ -8,7 +8,7 @@
 -- Adjust the configs below to your liking
 -- Open super macro
 -- Make a new macro
--- On the left add /script letsGo()
+-- On the left add /script PalStart()
 -- On the right paste this whole document in
 -- Click save macro
 -- Click Save Extended
@@ -34,7 +34,11 @@ HolyStrike = true
 CrusaderStrike = true
 
 -- Get Global Cool down
-local GCD = isSpellOnCd("Blessing of Might")
+function PalGCD()
+    if (UnitClass("player") == "Paladin") then
+      return isSpellOnCd("Blessing of Might")
+    end
+  end
 
 function heal()
     if (UnitHealth("player") / UnitHealthMax("player") < HealAt) and (Heal == true) then
@@ -43,13 +47,13 @@ function heal()
 end
 
 function blessings()
-    if not buffed("Blessing of Might", "player") and (BlessingOfMight == true) and (not GCD) then
+    if not buffed("Blessing of Might", "player") and (BlessingOfMight == true) and (not PalGCD()) then
         CastSpellByName("Blessing of Might")
     end
 end
 
 function auras()
-    if not buffed("Devotion Aura", "player") and (DevotionAura == true) and (not GCD) then
+    if not buffed("Devotion Aura", "player") and (DevotionAura == true) and (not PalGCD()) then
         CastSpellByName("Devotion Aura")
     end
 end
@@ -79,9 +83,9 @@ function autoAttack()
 end
 
 function seals()
-    if not buffed("Seal of the Crusader", "player") and (UnitExists("target")) and (SealOfTheCrusader == true) and (not GCD) then
+    if not buffed("Seal of the Crusader", "player") and (UnitExists("target")) and (SealOfTheCrusader == true) and (not PalGCD()) then
         CastSpellByName("Seal of the Crusader")
-    elseif not buffed("Seal of Righteousness", "player") and (UnitExists("target")) and (SealOfRighteousness == true) and (not GCD) then
+    elseif not buffed("Seal of Righteousness", "player") and (UnitExists("target")) and (SealOfRighteousness == true) and (not PalGCD()) then
         CastSpellByName("Seal of the Righteousness")
     elseif not buffed("Judgement of the Crusader", "target") and UnitExists("target") and (SealOfTheCrusader == true) then
         local CrusaderJudgementCd = isSpellOnCd("Judgement")
@@ -116,7 +120,7 @@ function attack()
     strikes()
 end
 
-function letsGo()
+function PalStart()
     heal()
     buffs()
     attack()

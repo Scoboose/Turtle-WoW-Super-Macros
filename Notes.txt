@@ -1,0 +1,35 @@
+Action Bar Slots:
+1 - 12 : Action Bar 1
+13 - 24 : Action Bar 2
+25 - 36 : Action Bar 3 (Right)
+37 - 48 : Action Bar 4 (Right-2)
+49 - 60 : Action Bar 5 (Bottom Right)
+61 - 72 : Action Bar 6 (Bottom Left)
+73 - 84 : Battle Stance (Warrior) or Stealth (Rogue)
+85 - 96 : Defensive Stance (Warrior)
+97 - 108 : Berserker Stance (Warrior)
+
+
+
+function getSpellId(spell)
+    local i = 1
+    while true do
+       local spellName, spellRank = GetSpellName(i, BOOKTYPE_SPELL)
+       if not spellName then
+          do break end
+       end
+       if spellName == spell then
+       return i; end;
+       i = i + 1
+    end
+end;
+
+function isSpellOnCd(spell)
+    local gameTime = GetTime();
+    local _,_, latency = GetNetStats();
+    local start,duration,_ = GetSpellCooldown(getSpellId(spell), BOOKTYPE_SPELL);
+    local cdT = start + duration - gameTime;
+    latency = latency / 1000;
+    return (duration > latency);
+    --return (duration ~= 0);
+end;
