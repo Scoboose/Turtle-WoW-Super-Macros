@@ -36,6 +36,9 @@ UseCurseOfRecklessness = false
 UseShadowBolt = true
 ShadowBoltMana = 0.5 -- % of mana needed to cast Shadow Bolt
 ShadowBoltTargetHealth = 0.1 -- % of health target needs to have to cat Shadow Bolt
+UseSearingPain = false
+SearingPainMana = 0.5 -- % of mana needed to cast Searing Pain
+SearingpainTargetHealth = 0.1 -- % of health target needs to have to cat Searing Pain
 
 -- Get Global Cool down
 function WLGCD()
@@ -99,11 +102,16 @@ function dots()
 end
 
 function spells()
-  if (UnitMana("player") / UnitManaMax("player") > ShadowBoltMana) and (UnitHealth("target") / UnitHealthMax("target") > ShadowBoltTargetHealth) and (not WLGCD()) then
+  if (UnitMana("player") / UnitManaMax("player") > ShadowBoltMana) and (UnitHealth("target") / UnitHealthMax("target") > ShadowBoltTargetHealth) and (not WLGCD()) and (UseShadowBolt == true) then
     if IsCurrentAction(61) then
       SpellStopCasting()
     end
     CastSpellByName("Shadow Bolt")
+  elseif (UnitMana("player") / UnitManaMax("player") > SearingPainMana) and (UnitHealth("target") / UnitHealthMax("target") > SearingpainTargetHealth) and (not WLGCD()) and (UseSearingPain == true) then
+    if IsCurrentAction(61) then
+      SpellStopCasting()
+    end
+    CastSpellByName("Searing Pain")
   end
 end
 
